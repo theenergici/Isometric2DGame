@@ -16,30 +16,30 @@
                 },
                 {
                     "name": "Move SW",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "2a986012-70e4-42fd-9c91-0f6f2737f3e3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Move NW",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "6f6c3052-b824-4977-96e4-2e0abbd93bda",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Move SE",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "903f0b32-0200-4eea-9dc4-abaf3b153394",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
