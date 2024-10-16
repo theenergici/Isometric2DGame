@@ -11,7 +11,7 @@ public class PlayerMonobehaviour : MonoBehaviour
     
     [HeaderAttribute("Speeds")]
 
-    [TextArea(3,1000), Tooltip("This is just a description it doesn't do anything to the code."), readOnly()]
+    [TextArea(3,1000), Tooltip("This is just a description it doesn't do anything to the code.")]
     public string speedDescription= "The NS and EW speed have been adjusted in code to the ration used"+ 
                                         "by default in the isometric view.\n"+
                                         "\tIf this ratio is changed it should be changed in the code as well.";
