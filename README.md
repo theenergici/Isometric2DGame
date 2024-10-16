@@ -36,6 +36,9 @@
 - [x] set up isometric camera
 - [x] test movements
 
+<i><b>Bonus:</b> Change sprites when moving in different directions</i> 
+TODO: set up in a animation moment Task 4.
+
 
 ## Task 3: AI State Machine for Enemy Behavior
 
