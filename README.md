@@ -28,13 +28,13 @@
 
 ### checklist:
 - [x] add unity input system
-- [ ] set up movement using WASD
+- [x] set up movement using WASD
     - [x] add WASD to input system
     - [x] add player asset to the scene
     - [x] create movement monobehaviour for player
     - [x] add rigid2Dbody to player game object
-- [ ] set up isometric camera
-- [ ] test movements
+- [x] set up isometric camera
+- [x] test movements
 
 
 ## Task 3: AI State Machine for Enemy Behavior
