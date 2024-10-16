@@ -29,10 +29,10 @@
 ### checklist:
 - [x] add unity input system
 - [ ] set up movement using WASD
-    - [ ] add WASD to input system
-    - [ ] add player asset to the scene
-    - [ ] create movement monobehaviour for player
-    - [ ] add rigid2Dbody to player game object
+    - [x] add WASD to input system
+    - [x] add player asset to the scene
+    - [x] create movement monobehaviour for player
+    - [x] add rigid2Dbody to player game object
 - [ ] set up isometric camera
 - [ ] test movements
 
