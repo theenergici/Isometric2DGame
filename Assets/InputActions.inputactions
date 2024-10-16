@@ -6,36 +6,9 @@
             "id": "9b8ff4c2-505e-497f-9bc8-77872960f6dd",
             "actions": [
                 {
-                    "name": "Move NE",
+                    "name": "Movement",
                     "type": "Value",
                     "id": "0820166f-cab7-4c1a-bba1-3e368cfcf512",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Move SW",
-                    "type": "Value",
-                    "id": "2a986012-70e4-42fd-9c91-0f6f2737f3e3",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Move NW",
-                    "type": "Value",
-                    "id": "6f6c3052-b824-4977-96e4-2e0abbd93bda",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Move SE",
-                    "type": "Value",
-                    "id": "903f0b32-0200-4eea-9dc4-abaf3b153394",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -44,92 +17,114 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "a440934d-2a17-47ed-afb1-1e54afcd26f6",
-                    "path": "<Keyboard>/w",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move NE",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0f83f584-890f-4415-8ae7-d9c87435457f",
-                    "path": "<Keyboard>/upArrow",
+                    "name": "move",
+                    "id": "0ca0deca-1d29-46c4-8816-03f763003555",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move NE",
-                    "isComposite": false,
+                    "action": "Movement",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "12718876-6721-4293-959c-0064cb084f80",
+                    "name": "up",
+                    "id": "b83f0f5e-9e03-4844-9a79-6e320e5f414d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "d8836d9d-bd60-42fd-ba8e-4aa251cceef7",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move SW",
+                    "action": "Movement",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "08dc9f16-ba92-4ff6-9120-8f99b639ce93",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move SW",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d2a0d154-0344-40db-a661-121b1a7d76a3",
+                    "name": "left",
+                    "id": "91edb55b-9d22-4d73-ab90-04a116afdfaf",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move NW",
+                    "action": "Movement",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "7db7ed14-355c-4c3d-90bb-f920fa8d4eda",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move NW",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9188878f-bb95-444b-9bc8-a2b72b4468c6",
+                    "name": "right",
+                    "id": "d9f6e154-1e73-4c0b-85d9-b9dbf2db180c",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move SE",
+                    "action": "Movement",
                     "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Alternate",
+                    "id": "0d4cdb9f-1cb5-4eaf-bcc7-fe40aea0f98d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "338f4db1-f19e-4f17-b1c8-73d17911a61a",
+                    "name": "up",
+                    "id": "fc35de21-67c5-48e3-b19d-a66ab587fb23",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "79a35289-7656-4693-a8f0-d02baaa4f405",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "e6b05503-f599-413e-9e20-bf2269540422",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "1f16e5bd-22ff-40b4-86f0-c129460ec6df",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move SE",
+                    "action": "Movement",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         }

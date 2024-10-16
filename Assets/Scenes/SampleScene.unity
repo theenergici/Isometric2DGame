@@ -349,9 +349,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1348727889777311403, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
+      propertyPath: EW_Speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3288105351125969015, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271528606264837690, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271528606264837690, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6506921868064287325, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -392,6 +404,10 @@ PrefabInstance:
     - target: {fileID: 6506921868064287325, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870680318721951268, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
