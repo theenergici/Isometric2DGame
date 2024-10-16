@@ -11,19 +11,34 @@
 ## Task 2: Isometric player movement and Input system
 
 1. <b>Install unitys new input system:</b>
-    set up controlls and movement
-    - The player should move diagonally (isometric movement):
-    
-        - W/Up Arrow: Moves the player northeast.
-        - S/Down Arrow: Moves the player southwest.
-        - A/Left Arrow: Moves the player northwest.
-        - D/Right Arrow: Moves the player southeast.
+
+ set up controlls and movement
+- The player should move diagonally (isometric movement):
+
+    - W/Up Arrow: Moves the player northeast.
+    - S/Down Arrow: Moves the player southwest.
+    - A/Left Arrow: Moves the player northwest.
+    - D/Right Arrow: Moves the player southeast.  
 
 2. <b>Set up initial collision</b>: 
     - add collider 2D to the player
 3. <b>Set up an isometric camera</b>
     - add a camera to the scene and set it to isometric view
     - make sure the camera follows the player
+
+### checklist:
+- [x] add unity input system
+- [x] set up movement using WASD
+    - [x] add WASD to input system
+    - [x] add player asset to the scene
+    - [x] create movement monobehaviour for player
+    - [x] add rigid2Dbody to player game object
+- [x] set up isometric camera
+- [x] test movements
+
+<i><b>Bonus:</b> Change sprites when moving in different directions</i> 
+TODO: set up in a animation moment Task 4.
+
 
 ## Task 3: AI State Machine for Enemy Behavior
 
