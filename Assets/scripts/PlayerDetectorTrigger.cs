@@ -29,7 +29,19 @@ public class PlayerDetectorTrigger : MonoBehaviour
     }         
 
     private IEnumerator PlayerOutOfVision(){
-        yield return new WaitForSecondsRealtime(2.0f);
+        Color orange= new Color(.99f, 0.4f, 0.0f, 1.0f);// color orange
+       _renderer.color= Color.yellow;
+       yield return new WaitForSecondsRealtime(0.4f);
+       _renderer.color= orange;
+       yield return new WaitForSecondsRealtime(0.4f);
+       _renderer.color= Color.yellow;
+       yield return new WaitForSecondsRealtime(0.4f);
+       _renderer.color= orange;
+       yield return new WaitForSecondsRealtime(0.4f);
+       _renderer.color= Color.yellow;
+       yield return new WaitForSecondsRealtime(0.4f);
+
+ 
         playerInDetectionRange = false;
         
     }   
