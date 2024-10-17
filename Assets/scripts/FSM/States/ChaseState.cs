@@ -15,8 +15,8 @@ public class ChaseState : IState
      SpriteRenderer renderer , Color normal, Color angry){
         _parent = parent;
         _detector = playerDetector;
-        if(_detector._player)
-            _player = _detector._player;
+        if(_detector.Player)
+            _player = _detector.Player;
         _renderer = renderer;
         normalColor = normal;
         angryColor= angry;
@@ -24,7 +24,7 @@ public class ChaseState : IState
     public void OnEnter()
     {
         if(!_player)
-            _player=_detector._player;
+            _player=_detector.Player;
             
         _renderer.color= angryColor;
     }

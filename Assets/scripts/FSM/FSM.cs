@@ -7,6 +7,7 @@ using UnityEditor;
 public class FSM 
 {
     private IState _currentState;
+    public IState CurrentState {get{return _currentState;}}
     private Dictionary<Type, List<Transition>> _transitions = new Dictionary< Type, List<Transition>>();
     private List<Transition> _currentTransitions = new List<Transition>();
     private List<Transition> _anyTransitions= new List<Transition>();
@@ -47,7 +48,10 @@ public class FSM
         transitions.Add(new Transition(to, predicate));
     }
 
-    public void addAnyTransition(IState state, Func<bool> predicate){}
+    public void addAnyTransition(IState state, Func<bool> predicate){
+        _anyTransitions.Add(new Transition(state, predicate));
+
+    }
 
     private class Transition{
         public Func<bool> Condition {get;}

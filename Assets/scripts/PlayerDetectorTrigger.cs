@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PolygonCollider2D))]
 
 public class PlayerDetectorTrigger : MonoBehaviour
 {
     private SpriteRenderer _renderer;
-    public PlayerMonobehaviour _player{get; private set;}
+    private PlayerMonobehaviour _player=null;
+    public PlayerMonobehaviour Player{get{
+        return _player;
+    }}
     public bool playerInDetectionRange {get;private set;}
     private Coroutine runningCoroutine= null;
     void Awake() {
@@ -17,15 +19,15 @@ public class PlayerDetectorTrigger : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D other) {
+
         if(other.GetComponent<PlayerMonobehaviour>()){
             if(runningCoroutine!= null){
                 StopCoroutine(runningCoroutine);
             }
             playerInDetectionRange = true;
 
-            
             // since we work with only one player is not an issue
-            if(!_player)_player= other.GetComponent<PlayerMonobehaviour>();
+            if(!Player)_player= other.GetComponent<PlayerMonobehaviour>();
         }         
     }
 
