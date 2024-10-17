@@ -718,6 +718,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6271528606264837690, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271528606264837690, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271528606264837690, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
       propertyPath: m_UseFullKinematicContacts
       value: 0
       objectReference: {fileID: 0}
@@ -778,6 +786,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6142698794320803295, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: -6142698794320803295, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 869472636420191115, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.984711
@@ -822,9 +838,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 3431816292581512013, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
+    - target: {fileID: 7833158616040525881, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
+      propertyPath: DefaultColor.b
+      value: 0.9475432
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833158616040525881, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
+      propertyPath: DefaultColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833158616040525881, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
+      propertyPath: DefaultColor.r
+      value: 0.015686274
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
