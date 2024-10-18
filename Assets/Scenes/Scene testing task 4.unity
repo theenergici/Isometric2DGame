@@ -853,7 +853,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageOnHit: 5
+  attackDistance: 1.8
   animator: {fileID: 0}
+  attackReference: {fileID: -7774262028377731906, guid: c6c69ae7292684d4ba46783aaf4ab5b5, type: 3}
+--- !u!212 &1794025186
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794025182}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!224 &1993231955 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1898593451166015851, guid: e4e99977df7b743499011f76b5e9a55f, type: 3}
@@ -881,11 +935,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 281518330685648474, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3663025
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 281518330685648474, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04346466
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 281518330685648474, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -933,7 +987,23 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 136befa062d0faa4a8db996be61dfbe0, type: 2}
     - target: {fileID: 7294702713228978740, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294702713228978740, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.967
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294702713228978740, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294702713228978740, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294702713228978740, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 360
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -942,6 +1012,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4696685281245871156, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1794025185}
+    - targetCorrespondingSourceObject: {fileID: 4696685281245871156, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1794025186}
     - targetCorrespondingSourceObject: {fileID: 907306556988222907, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1753786504}

@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
 public class PlayerMonobehaviour : MonoBehaviour
-{
-
-        
+{   
     
     [HeaderAttribute("Speeds")]
 
@@ -26,6 +25,9 @@ public class PlayerMonobehaviour : MonoBehaviour
     private Vector2 inputMove;
     private Vector2 scalingVector;
     private Rigidbody2D rb;
+    private AttackScript AttackScript;
+    
+    public Direction ViewDirection{get; private set;} 
     
     // Start is called before the first frame update
     void Awake()
@@ -33,6 +35,8 @@ public class PlayerMonobehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //due to the isometric view the EW direction should be 2*NS direction to keep the correct perspective
         scalingVector = new Vector2(isoRatio * EW_Speed, NS_Speed);
+        AttackScript = GetComponentInChildren<AttackScript>();
+        
     }
 
     // Update is called once per frame
@@ -45,6 +49,16 @@ public class PlayerMonobehaviour : MonoBehaviour
 
         Vector2 t = value.Get<Vector2>();
         inputMove = VectorMath.rotateVector(t, -Mathf.PI/4);
+        
+        var d = DirectionMap.Map(inputMove);
+        
+        if(d!= Direction.origin){
+            Debug.Log(d);
+            ViewDirection = d; 
+            AttackScript?.changeDirection(d);
+        }       
+            
+
     }
 
 
