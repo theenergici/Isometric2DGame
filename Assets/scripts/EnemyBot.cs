@@ -71,9 +71,6 @@ public class EnemyBot : MonoBehaviour
         Func<bool> playerDetected() => ()=>detector.playerInDetectionRange && !isAttacking;
         Func<bool> playerOutOfRange() => ()=>!detector.playerInDetectionRange && !isAttacking;
         Func<bool> playerInATKRange() => ()=> attackCollider.IsInAttackRange && !isAttacking;
-            
-        
-
 
         _stateMachine.SetState(idle);
     }        
