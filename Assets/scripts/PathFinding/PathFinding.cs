@@ -29,9 +29,9 @@ public class PathFinding
             }
 
             var neighborTiles = GetNeighborTiles(currentTile);
-
+            
             foreach(var neighbor in neighborTiles){
-                if(neighbor.isBlocked || closedList.Contains(neighbor) || Mathf.Abs(neighbor.gridLocation.z - currentTile.gridLocation.z)> PlayerConstants.jumpHeight){
+                if(neighbor.isBlocked || closedList.Contains(neighbor) || Mathf.Abs(neighbor.gridLocation.z - currentTile.gridLocation.z)> 1){
                     continue;
                 }
                 neighbor.G = GetManhattenDistance(start, neighbor);
@@ -39,7 +39,7 @@ public class PathFinding
 
                 neighbor.previous= currentTile;
                 
-                if(openList.Contains(neighbor)){
+                if(!openList.Contains(neighbor)){
                     openList.Add(neighbor);
                 }
 
@@ -73,17 +73,27 @@ public class PathFinding
         var map= MapManager.Instance.map;
         List<MyTile> neighbors = new List<MyTile>();
 
-
-        for(int i = -1; i<=1; i++){
-            for(int j = -1; j<=1; j++){
-                if(j!=0 && i!=0 && (i==0 || j==0)){ // condition for only the sides && (i==0 || j==0)
-                    Vector2Int locationToCheck = new Vector2Int(currentTile.gridLocation.x+i, currentTile.gridLocation.y +j);
-                    if(map.ContainsKey(locationToCheck)){
-                        neighbors.Add(map[locationToCheck]);
-                    }
-                }
-            }
+        //right
+        Vector2Int locationToCheck = new Vector2Int(currentTile.gridLocation.x+1, currentTile.gridLocation.y);
+        if(map.ContainsKey(locationToCheck)){
+            neighbors.Add(map[locationToCheck]);
         }
+        // left
+        locationToCheck = new Vector2Int(currentTile.gridLocation.x-1, currentTile.gridLocation.y);
+        if(map.ContainsKey(locationToCheck)){
+            neighbors.Add(map[locationToCheck]);
+        }
+        //top
+        locationToCheck = new Vector2Int(currentTile.gridLocation.x, currentTile.gridLocation.y+1);
+        if(map.ContainsKey(locationToCheck)){
+            neighbors.Add(map[locationToCheck]);
+        }
+        //bot
+        locationToCheck = new Vector2Int(currentTile.gridLocation.x, currentTile.gridLocation.y-1);
+        if(map.ContainsKey(locationToCheck)){
+            neighbors.Add(map[locationToCheck]);
+        }
+    
         return neighbors;
     }
 }

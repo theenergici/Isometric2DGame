@@ -17,6 +17,7 @@ public class MapManager : MonoBehaviour
     }
     [SerializeField]
     MyTile tilePrefab;
+    private Tilemap tilemap;
 
     public Dictionary<Vector2, MyTile> map;
     
@@ -26,11 +27,6 @@ public class MapManager : MonoBehaviour
 
         else _instance = this;
         
-        
-
-    }
-
-    private void Start() {
         GameObject TileContainer= new GameObject();
         TileContainer.transform.parent = transform;
         TileContainer.name = "TileContainer";
@@ -39,7 +35,7 @@ public class MapManager : MonoBehaviour
 
         var wayTiles = FindObjectsOfType<WayTiles>();
         
-        var tilemap =tilemaps[0];
+        tilemap =tilemaps[0];
         
         BoundsInt bounds = tilemap.cellBounds;
 
@@ -91,4 +87,23 @@ public class MapManager : MonoBehaviour
         
         
     }
+
+    public MyTile getTileFromWorldPosition(Vector3 position){
+        var cellWorldPosition = tilemap.WorldToCell(position);
+        var k = new Vector2(cellWorldPosition.x, cellWorldPosition.y);
+        if(map.ContainsKey(k))
+            return map[k];
+        else return null;
+
+    }
+
+    public void PositionOnTile(MyTile tile, Transform _transform)
+    {
+        _transform.position=  new Vector3(tile.transform.position.x, tile.transform.position.y + 0.0001f, tile.transform.position.z);
+        var renderer = _transform.gameObject.GetComponent<SpriteRenderer>();
+        var tileRenderer = tile.GetComponent<SpriteRenderer>();
+        if (renderer!=null && tileRenderer!= null)
+            renderer.sortingOrder = tileRenderer.sortingOrder;
+    }
+
 }

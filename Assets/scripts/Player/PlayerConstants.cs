@@ -10,3 +10,6 @@ using System.Threading.Tasks;
     public static float NS_Speed;
     public static float EW_Speed;
 }
+
+
+

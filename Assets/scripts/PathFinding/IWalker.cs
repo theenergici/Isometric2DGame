@@ -21,8 +21,9 @@ public class IWalker : MonoBehaviour
     public bool SetNextTarget(MyTile newTarget){
         CurrentTarget = newTarget;
         if(CurrentTarget!= null){
+            Debug.Log($"getting path {CurrentTile} to {CurrentTarget.gridLocation}");
             currentPath = pathFinder.findPath(CurrentTile, CurrentTarget);
-
+            Debug.Log($"Path length {currentPath.Count}");
         }
         return CurrentTarget != null;
 
@@ -33,22 +34,23 @@ public class IWalker : MonoBehaviour
     }
     public void Step(float time){
         var step = time * speed;  
+        if(currentPath.Count==0)return;
+
         var zIndex = currentPath[0].transform.position.z;
         transform.position = Vector2.MoveTowards(transform.position, currentPath[0].transform.position, step);
         transform.position = new Vector3(transform.position.x, transform.position.y, zIndex);
 
-        if(Vector2.Distance(transform.position, currentPath[0].transform.position)< 0.0001f)
+        if(Vector2.Distance(transform.position, currentPath[0].transform.position)< 0.01f)
             {
                 PositionCharacterOnTile(currentPath[0]);
+                currentPath.RemoveAt(0);
             }
 
     }
 
-    private void PositionCharacterOnTile(MyTile tile)
+    public void PositionCharacterOnTile(MyTile tile)
     {
-        transform.position=  new Vector3(tile.transform.position.x, tile.transform.position.y + 0.0001f, tile.transform.position.z);
-        var renderer =GetComponent<SpriteRenderer>();
-        renderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
+        MapManager.Instance.PositionOnTile(tile, transform);
         CurrentTile = tile;
     }
 }

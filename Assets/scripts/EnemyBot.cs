@@ -22,6 +22,9 @@ public class EnemyBot : MonoBehaviour
     GameObject attackRangeVisual;
     AttackRangeTrigger attackCollider;
 
+    [SerializeField]
+    WayTiles StartingObjective;
+
   
     private PlayerDetectorTrigger detector;
     private FSM _stateMachine;
@@ -34,13 +37,19 @@ public class EnemyBot : MonoBehaviour
 
 
 
-    private void Awake() {
+    private void Start() {
 
         
         Real_attackRange = attackRange + (transform.localScale.x/2 /Mathf.Sin(MathF.PI/4));
        
         attackCollider = GetComponentInChildren<AttackRangeTrigger>();
         walker = GetComponent<IWalker>();
+
+        var t = MapManager.Instance.getTileFromWorldPosition(transform.position);
+        walker.PositionCharacterOnTile(t);
+
+        walker.SetNextTarget(StartingObjective);
+        
         
 
         //
@@ -74,7 +83,7 @@ public class EnemyBot : MonoBehaviour
         Func<bool> playerOutOfRange() => ()=>!detector.playerInDetectionRange && !isAttacking;
         Func<bool> playerInATKRange() => ()=> attackCollider.IsInAttackRange && !isAttacking;
 
-        _stateMachine.SetState(idle);
+        _stateMachine.SetState(patrolState);
     }        
     
     
