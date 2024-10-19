@@ -52,6 +52,7 @@ public class MapManager : MonoBehaviour
                         var cellWorldPosition = tilemap.GetCellCenterWorld(tileLoc);
                         tempTile.transform.position = new Vector3(cellWorldPosition.x,cellWorldPosition.y,cellWorldPosition.z + 1);
                         tempTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = tilemap.GetComponent<TilemapRenderer>().sortingOrder;
+                        tempTile.gridLocation = tileLoc;
 
                         map.Add(tileKey, tempTile);
 

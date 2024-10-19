@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMonobehaviour : MonoBehaviour
 {
 
-        
+       
     
     [HeaderAttribute("Speeds")]
 
@@ -22,6 +22,9 @@ public class PlayerMonobehaviour : MonoBehaviour
     [MinAttribute(0.0f), Tooltip("East-West speed")]
     public float EW_Speed = 5.0f;
 
+    [SerializeField]
+    float MaxJumpHeight = 1;
+
     private const float isoRatio = 2.0f;
     private Vector2 inputMove;
     private Vector2 scalingVector;
@@ -33,18 +36,24 @@ public class PlayerMonobehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //due to the isometric view the EW direction should be 2*NS direction to keep the correct perspective
         scalingVector = new Vector2(isoRatio * EW_Speed, NS_Speed);
+        PlayerConstants.jumpHeight= MaxJumpHeight;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + Time.fixedDeltaTime*inputMove*scalingVector);
+
     }
 
     public void OnMovement(InputValue value){
 
         Vector2 t = value.Get<Vector2>();
         inputMove = VectorMath.rotateVector(t, -Mathf.PI/4);
+
+        //Comentable if we dont want it to be changeable at run time
+        PlayerConstants.jumpHeight= MaxJumpHeight;
+        
     }
 
 

@@ -29,6 +29,8 @@ public class EnemyBot : MonoBehaviour
 
     public bool isAttacking=false;
 
+    private IWalker walker;
+    
 
 
 
@@ -38,7 +40,7 @@ public class EnemyBot : MonoBehaviour
         Real_attackRange = attackRange + (transform.localScale.x/2 /Mathf.Sin(MathF.PI/4));
        
         attackCollider = GetComponentInChildren<AttackRangeTrigger>();
-        
+        walker = GetComponent<IWalker>();
         
 
         //
@@ -52,10 +54,10 @@ public class EnemyBot : MonoBehaviour
         //TODO add player
         var chaseState = new ChaseState(this, detector, _renderer, DefaultColor, Angry);
         var atkState = new AttackState(this, detector);
-        var patrolState = new PatrolState(this);
+        var patrolState = new PatrolState(this, walker);
 
         //TODO fix conditions
-        At(idle, chaseState, playerOutOfRange());
+        At(idle, chaseState, playerOutOfRange());//set specifics for each
         At(patrolState, chaseState, playerOutOfRange());
         At(chaseState, idle, playerDetected());
 
@@ -81,15 +83,12 @@ public class EnemyBot : MonoBehaviour
     private void Update() {
         _stateMachine.Tick();
 
-
         Real_attackRange = attackRange + (transform.localScale.x/2 /Mathf.Sin(MathF.PI/4));  
         var tmp = Real_attackRange*2;
         if(attackRangeVisual!=null){
-            attackRangeVisual.transform.localScale = new Vector3(tmp, tmp , tmp);
-            
+            attackRangeVisual.transform.localScale = new Vector3(tmp, tmp , tmp);   
         }      
     
-        Debug.Log(_stateMachine.CurrentState);
     }
     
 
