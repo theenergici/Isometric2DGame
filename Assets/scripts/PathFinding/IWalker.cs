@@ -46,7 +46,7 @@ public class IWalker : MonoBehaviour
 
     private void PositionCharacterOnTile(MyTile tile)
     {
-        transform.position=  new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
+        transform.position=  new Vector3(tile.transform.position.x, tile.transform.position.y + 0.0001f, tile.transform.position.z);
         var renderer =GetComponent<SpriteRenderer>();
         renderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
         CurrentTile = tile;

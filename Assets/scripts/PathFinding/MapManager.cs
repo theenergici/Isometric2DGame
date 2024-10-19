@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
@@ -29,13 +32,15 @@ public class MapManager : MonoBehaviour
 
     private void Start() {
         GameObject TileContainer= new GameObject();
-        TileContainer.transform.parent = this.transform;
+        TileContainer.transform.parent = transform;
         TileContainer.name = "TileContainer";
         var tilemaps = GetComponentsInChildren<Tilemap>();
         map = new Dictionary<Vector2, MyTile>();
 
-        foreach (var tilemap in tilemaps)
-        {
+        var wayTiles = FindObjectsOfType<WayTiles>();
+        
+        var tilemap =tilemaps[0];
+        
         BoundsInt bounds = tilemap.cellBounds;
 
         for(int z= bounds.zMax; z> bounds.zMin; z--){
@@ -46,9 +51,13 @@ public class MapManager : MonoBehaviour
                     var tileLoc = new Vector3Int(x,y,z);
                     var tileKey = new Vector2(x,y);
 
+                    MyTile tempTile;
                     if(tilemap.HasTile(tileLoc) && !map.ContainsKey(tileKey) ){
 
-                        var tempTile = Instantiate(tilePrefab, TileContainer.transform);
+                    
+                        tempTile = Instantiate(tilePrefab, TileContainer.transform);
+                        tempTile.name = $"Tile:({tileLoc.x},{tileLoc.y})";
+                        
                         var cellWorldPosition = tilemap.GetCellCenterWorld(tileLoc);
                         tempTile.transform.position = new Vector3(cellWorldPosition.x,cellWorldPosition.y,cellWorldPosition.z + 1);
                         tempTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = tilemap.GetComponent<TilemapRenderer>().sortingOrder;
@@ -60,7 +69,25 @@ public class MapManager : MonoBehaviour
                     }
                 }
             } 
-        }
+                
+        
+        foreach (var tempTile in wayTiles)
+            {
+                var p =tilemap.WorldToCell(tempTile.transform.position);
+                var tKey= new Vector2(p.x,p.y);
+                var cellWorldPosition = tilemap.GetCellCenterWorld(p);
+                tempTile.transform.position = new Vector3(cellWorldPosition.x,cellWorldPosition.y,cellWorldPosition.z + 1);
+                tempTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = tilemap.GetComponent<TilemapRenderer>().sortingOrder;
+                tempTile.gridLocation = p;
+                
+                if(map.ContainsKey(tKey)){
+                    var ex = map[tKey];
+                    map.Remove(tKey);
+                    Destroy(ex.gameObject);
+                }      
+                map.Add(tKey,tempTile);
+                
+            } 
         
         
     }

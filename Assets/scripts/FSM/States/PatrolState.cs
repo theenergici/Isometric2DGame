@@ -6,8 +6,8 @@ public class PatrolState : IState
 {
     private MonoBehaviour _parent;
     private IWalker _walker;
-    int tickInt;
-    int _pathTickCheck;
+    private int tickInt;
+    private int _pathTickCheck;
     private float cumulativeTime;
 
 

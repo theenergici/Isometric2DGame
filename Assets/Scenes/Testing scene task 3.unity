@@ -3248,6 +3248,9 @@ PrefabInstance:
       addedObject: {fileID: 786325666}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1599134403297903541, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1643846790}
+    - targetCorrespondingSourceObject: {fileID: 1599134403297903541, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1643846783}
   m_SourcePrefab: {fileID: 100100000, guid: 46a5602d5a724824fb1f4d6a03adf4b3, type: 3}
@@ -13285,6 +13288,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1643846790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643846775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0dd5516e6173440a1c382f06ad6b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentTarget: {fileID: 0}
+  currentPath: []
+  speed: 1
 --- !u!1 &1802128389
 GameObject:
   m_ObjectHideFlags: 0
