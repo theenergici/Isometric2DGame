@@ -16,11 +16,14 @@ public class AttackScript : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    Transform attackEmiterPivot;
+    public Transform attackEmiterPivot;
 
     [SerializeField]
     InputActionReference attackReference;
     
+    [SerializeField]
+    bool isBot=false;
+
     private Direction attackDirection=Direction.North;
 
     
@@ -37,12 +40,14 @@ public class AttackScript : MonoBehaviour
         
     }
     private void OnEnable() {
-        attackReference.action.performed += DoAttack;
+        if(!isBot)
+            attackReference.action.performed += DoAttack;
         
     }
 
     private void OnDisable() {
-        attackReference.action.performed -= DoAttack;
+        if(!isBot)    
+            attackReference.action.performed -= DoAttack;
     }
 
 
@@ -71,6 +76,9 @@ public class AttackScript : MonoBehaviour
 
     private void DoAttack(InputAction.CallbackContext context)
     {   
+        DoAttack();
+    }
+    public void DoAttack(){
         var angle = (int)attackDirection * -45 + 90;
         attackEmiterPivot.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, angle);
         if(animator!=null)
