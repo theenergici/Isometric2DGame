@@ -12,6 +12,16 @@ public class MapManager : MonoBehaviour
     private static MapManager _instance;
     public static MapManager Instance{
         get{   
+            if(_instance==null){
+                var  MM= FindObjectOfType<MapManager>();
+                if(MM==null){
+                    GameObject go= new GameObject("MapManager");
+                    MM = go.AddComponent<MapManager>();
+                    
+                }
+                _instance = MM;
+                
+            }
             return _instance;    
         }
     }

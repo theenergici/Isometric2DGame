@@ -9,12 +9,14 @@ public class AttackScript : MonoBehaviour
 {
     [SerializeField]
     float damageOnHit= 5.0f;
-    [SerializeField]
+    [SerializeField, Tooltip("Distance from pivot the animation will be done")]
     float attackDistance = 1.8f;
 
     [SerializeField]
     Animator animator;
-    Transform attackEmiterTransform;
+
+    [SerializeField]
+    Transform attackEmiterPivot;
 
     [SerializeField]
     InputActionReference attackReference;
@@ -28,14 +30,11 @@ public class AttackScript : MonoBehaviour
         
         if(attackReference==null)Debug.LogError($"Missing attack InputActionReference on {name}");
         if(!animator) animator= GetComponent<Animator>();
-        var t = GetComponentsInChildren<Transform>();
-        foreach (var trans in t ){
-            if(trans.gameObject!= this.gameObject){
-                attackEmiterTransform= trans.transform;
-                break;
-            }
-        }
-        attackEmiterTransform.localPosition = new Vector3(attackEmiterTransform.localPosition.x, attackDistance ,attackEmiterTransform.localPosition.z);
+       
+        
+        if(attackEmiterPivot != null)
+            transform.position = new Vector3(transform.localPosition.x, transform.position.y + attackDistance ,transform.localPosition.z);
+        
     }
     private void OnEnable() {
         attackReference.action.performed += DoAttack;
@@ -51,8 +50,9 @@ public class AttackScript : MonoBehaviour
         attackDirection = newDirection;
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter2D(Collider2D other) {
 
+        
         var cast =other.GetComponentInChildren<IHittable>();
         if(cast!=null){
             if(cast.OnHit(damageOnHit))
@@ -63,16 +63,18 @@ public class AttackScript : MonoBehaviour
 
 
     public void afterAttack(){
-        animator.SetBool("Attack", false);
+        
+        if(animator!=null)
+            animator?.SetBool("Attack", false);
     }
 
 
     private void DoAttack(InputAction.CallbackContext context)
     {   
-        var angle = (int)attackDirection * -45;
-        Debug.Log(angle);
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, angle);
-        animator.SetBool("Attack", true);
+        var angle = (int)attackDirection * -45 + 90;
+        attackEmiterPivot.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, angle);
+        if(animator!=null)
+            animator?.SetBool("Attack", true);
     }
 
 }

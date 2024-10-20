@@ -60,6 +60,7 @@ public class EnemyBot : MonoBehaviour
         //
         detector = GetComponent<PlayerDetectorTrigger>();  
         _stateMachine  = new FSM();
+        
         _renderer = GetComponent<SpriteRenderer>();
         _renderer.color= DefaultColor;
 
