@@ -11,18 +11,24 @@ public class HPManager : MonoBehaviour, IHittable
     [SerializeField]
     Slider HP_visual;
     private HP hp;
+    [SerializeField]
+    private GameObject ParentObject;
 
 
     private void Awake() {
         hp= new HP(MAX_HP);
         if(HP_visual==null)
             HP_visual = GetComponentInChildren<Slider>();
+        if(ParentObject==null)
+            ParentObject=gameObject;
     }
 
     public void OnDeath()
     {   
         HP_visual.gameObject.SetActive(false);
-        Debug.Log($"Chracter {this.name} is dead\n");
+        ParentObject.SetActive(false);
+        Debug.Log($"Chracter {name} is dead\n");
+
     }
 
     public bool OnHit(float dmg)

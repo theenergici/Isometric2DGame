@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageOnHit: 5
-  attackDistance: 1.8
+  attackDistance: 0.54
   animator: {fileID: 6311906748711734335}
   attackEmiterPivot: {fileID: 281518330685648474}
   attackReference: {fileID: -7774262028377731906, guid: c6c69ae7292684d4ba46783aaf4ab5b5, type: 3}
@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 281518330685648474}
   - component: {fileID: 6311906748711734335}
   - component: {fileID: 2760568004454404551}
+  - component: {fileID: 5712516439866633604}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -195,7 +196,7 @@ Animator:
   m_GameObject: {fileID: 4696685281245871156}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 136befa062d0faa4a8db996be61dfbe0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -258,3 +259,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5712516439866633604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4696685281245871156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04aa46bbfac8ac49963ed3cc9fb4896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
