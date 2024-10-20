@@ -31,6 +31,8 @@ public class PlayerMonobehaviour : MonoBehaviour
     private Vector2 scalingVector;
     private Rigidbody2D rb;
     
+    public MyTile currentTile;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -46,6 +48,8 @@ public class PlayerMonobehaviour : MonoBehaviour
         var newpos =rb.position + Time.fixedDeltaTime*inputMove*scalingVector;
         var t =MapManager.Instance.getTileFromWorldPosition(newpos);
         rb.MovePosition(newpos);
+        if(t!=null)currentTile= t;
+        
         if(t!=null && Vector2.Distance(rb.position, t.transform.position)< 0.01){   
             // probably should change for a better option not to call get component as often
             MapManager.Instance.PositionOnTile(t,transform);

@@ -105,5 +105,7 @@ public class MapManager : MonoBehaviour
         if (renderer!=null && tileRenderer!= null)
             renderer.sortingOrder = tileRenderer.sortingOrder;
     }
+    
+
 
 }

@@ -34,6 +34,11 @@ public class EnemyBot : MonoBehaviour
 
     private IWalker walker;
     
+    private Vector3 lastPosition;
+    private float stayPutCounter;
+    [SerializeField]
+    private float MaxTimeIdle;
+    
 
 
 
@@ -61,7 +66,7 @@ public class EnemyBot : MonoBehaviour
         // isntantiate possible states the enemy can have
         var idle = new IdleState(this, _renderer, DefaultColor);
         //TODO add player
-        var chaseState = new ChaseState(this, detector, _renderer, DefaultColor, Angry);
+        var chaseState = new ChaseState(this, detector, _renderer, DefaultColor, Angry, walker);
         var atkState = new AttackState(this, detector);
         var patrolState = new PatrolState(this, walker);
 
@@ -72,9 +77,10 @@ public class EnemyBot : MonoBehaviour
 
         // to atk state
         _stateMachine.addAnyTransition(atkState, playerInATKRange());
-
+        
         At(idle, atkState, playerOutOfRange());
         At(chaseState, atkState, playerDetected());
+        At(patrolState, idle, TooMuchTimeIdle());
 
 
         void At(IState to, IState from, Func<bool> condition)=> _stateMachine.addTransition( from, to, condition);
@@ -82,6 +88,8 @@ public class EnemyBot : MonoBehaviour
         Func<bool> playerDetected() => ()=>detector.playerInDetectionRange && !isAttacking;
         Func<bool> playerOutOfRange() => ()=>!detector.playerInDetectionRange && !isAttacking;
         Func<bool> playerInATKRange() => ()=> attackCollider.IsInAttackRange && !isAttacking;
+        Func<bool> TooMuchTimeIdle ()=> ()=> stayPutCounter> MaxTimeIdle;
+
 
         _stateMachine.SetState(patrolState);
     }        
@@ -96,8 +104,17 @@ public class EnemyBot : MonoBehaviour
         var tmp = Real_attackRange*2;
         if(attackRangeVisual!=null){
             attackRangeVisual.transform.localScale = new Vector3(tmp, tmp , tmp);   
-        }      
+        } 
+
+        if(lastPosition==transform.position){
+            stayPutCounter+=Time.deltaTime;
+            if(stayPutCounter> MaxTimeIdle){
+                walker.SetNextTarget(StartingObjective);
+            }
+        }else stayPutCounter=0;   
+        lastPosition = transform.position;  
     
+
     }
     
 
