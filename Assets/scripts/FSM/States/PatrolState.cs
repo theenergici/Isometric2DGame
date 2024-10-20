@@ -5,22 +5,36 @@ using UnityEngine;
 public class PatrolState : IState
 {
     private MonoBehaviour _parent;
-    public PatrolState(MonoBehaviour parent){
+    private IWalker _walker;
+    private int tickInt;
+    private int _pathTickCheck;
+    private float cumulativeTime;
+
+
+    public PatrolState(MonoBehaviour parent, IWalker walker, int pathTickCheck=5){
         _parent=parent;
+        _walker =walker;
+        _pathTickCheck= pathTickCheck;        
     }
     public void OnEnter()
     {
-        throw new System.NotImplementedException();
+        tickInt=0;
     }
 
     public void OnExit()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Tick()
     {
-        throw new System.NotImplementedException();
+        tickInt++;
+        cumulativeTime+=Time.deltaTime;
+
+        if(tickInt%_pathTickCheck==0){
+            _walker.Step(cumulativeTime);
+            cumulativeTime=0;
+        }
     }
 
    

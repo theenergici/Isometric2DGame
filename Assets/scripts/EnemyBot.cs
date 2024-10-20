@@ -22,6 +22,9 @@ public class EnemyBot : MonoBehaviour
     GameObject attackRangeVisual;
     AttackRangeTrigger attackCollider;
 
+    [SerializeField]
+    WayTiles StartingObjective;
+
   
     private PlayerDetectorTrigger detector;
     private FSM _stateMachine;
@@ -29,15 +32,28 @@ public class EnemyBot : MonoBehaviour
 
     public bool isAttacking=false;
 
+    private IWalker walker;
+    
+    private Vector3 lastPosition;
+    private float stayPutCounter;
+    [SerializeField]
+    private float MaxTimeIdle= 10.0f;
+    
 
 
 
-    private void Awake() {
+    private void Start() {
 
         
         Real_attackRange = attackRange + (transform.localScale.x/2 /Mathf.Sin(MathF.PI/4));
        
         attackCollider = GetComponentInChildren<AttackRangeTrigger>();
+        walker = GetComponent<IWalker>();
+
+        var t = MapManager.Instance.getTileFromWorldPosition(transform.position);
+        walker.PositionCharacterOnTile(t);
+
+        walker.SetNextTarget(StartingObjective);
         
         
 
@@ -50,20 +66,21 @@ public class EnemyBot : MonoBehaviour
         // isntantiate possible states the enemy can have
         var idle = new IdleState(this, _renderer, DefaultColor);
         //TODO add player
-        var chaseState = new ChaseState(this, detector, _renderer, DefaultColor, Angry);
+        var chaseState = new ChaseState(this, detector, _renderer, DefaultColor, Angry, walker);
         var atkState = new AttackState(this, detector);
-        var patrolState = new PatrolState(this);
+        var patrolState = new PatrolState(this, walker);
 
         //TODO fix conditions
-        At(idle, chaseState, playerOutOfRange());
+        At(idle, chaseState, playerOutOfRange());//set specifics for each
         At(patrolState, chaseState, playerOutOfRange());
         At(chaseState, idle, playerDetected());
 
         // to atk state
         _stateMachine.addAnyTransition(atkState, playerInATKRange());
-
+        
         At(idle, atkState, playerOutOfRange());
         At(chaseState, atkState, playerDetected());
+        At(patrolState, idle, TooMuchTimeIdle());
 
 
         void At(IState to, IState from, Func<bool> condition)=> _stateMachine.addTransition( from, to, condition);
@@ -71,11 +88,10 @@ public class EnemyBot : MonoBehaviour
         Func<bool> playerDetected() => ()=>detector.playerInDetectionRange && !isAttacking;
         Func<bool> playerOutOfRange() => ()=>!detector.playerInDetectionRange && !isAttacking;
         Func<bool> playerInATKRange() => ()=> attackCollider.IsInAttackRange && !isAttacking;
-            
-        
+        Func<bool> TooMuchTimeIdle ()=> ()=> stayPutCounter> MaxTimeIdle;
 
 
-        _stateMachine.SetState(idle);
+        _stateMachine.SetState(patrolState);
     }        
     
     
@@ -84,15 +100,23 @@ public class EnemyBot : MonoBehaviour
     private void Update() {
         _stateMachine.Tick();
 
-
         Real_attackRange = attackRange + (transform.localScale.x/2 /Mathf.Sin(MathF.PI/4));  
         var tmp = Real_attackRange*2;
         if(attackRangeVisual!=null){
-            attackRangeVisual.transform.localScale = new Vector3(tmp, tmp , tmp);
-            
-        }      
+            attackRangeVisual.transform.localScale = new Vector3(tmp, tmp , tmp);   
+        } 
+
+        if(lastPosition==transform.position){
+            stayPutCounter+=Time.deltaTime;
+            if(stayPutCounter> MaxTimeIdle){
+                walker.SetNextTarget(StartingObjective);
+                stayPutCounter=0;
+            }
+        }else stayPutCounter=0;   
+
+        lastPosition = transform.position;  
     
-        Debug.Log(_stateMachine.CurrentState);
+
     }
     
 
