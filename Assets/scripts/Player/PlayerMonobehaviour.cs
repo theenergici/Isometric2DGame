@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 
 public class PlayerMonobehaviour : MonoBehaviour
@@ -42,7 +43,26 @@ public class PlayerMonobehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + Time.fixedDeltaTime*inputMove*scalingVector);
+        var newpos =rb.position + Time.fixedDeltaTime*inputMove*scalingVector;
+        var t =MapManager.Instance.getTileFromWorldPosition(newpos);
+        rb.MovePosition(newpos);
+        if(t!=null && Vector2.Distance(rb.position, t.transform.position)< 0.01){   
+            // probably should change for a better option not to call get component as often
+            MapManager.Instance.PositionOnTile(t,transform);
+            
+        }else if(t!=null){   
+            // probably should change for a better option not to call get component as often
+            transform.position= new Vector3(transform.position.x, transform.position.y, t.transform.position.z);
+            var renderer = GetComponent<SpriteRenderer>();
+            var tileRenderer = t.GetComponent<SpriteRenderer>();
+            if (renderer!=null && tileRenderer!= null)
+                renderer.sortingOrder = tileRenderer.sortingOrder;
+        }       
+
+        
+        
+        
+       
 
     }
 

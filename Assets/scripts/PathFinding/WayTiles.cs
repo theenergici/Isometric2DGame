@@ -18,10 +18,11 @@ public class WayTiles : MyTile
             Destroy(this);
         
     }
-
-    private void OnTriggerEnter(Collider other) {
-        var o =other.GetComponent<IWalker>();
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log(other.name);
+        var o = other.GetComponentInChildren<IWalker>();
         if(o!= null){
+            Debug.Log($"arrived at point {name}");
             o.SetNextTarget(GetNextTile());
         }
     }
