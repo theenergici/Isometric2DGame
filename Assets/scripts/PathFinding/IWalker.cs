@@ -21,9 +21,9 @@ public class IWalker : MonoBehaviour
     public bool SetNextTarget(MyTile newTarget){
         CurrentTarget = newTarget;
         if(CurrentTarget!= null){
-            Debug.Log($"getting path {CurrentTile} to {CurrentTarget.gridLocation}");
+            // Debug.Log($"getting path {CurrentTile} to {CurrentTarget.gridLocation}");
             currentPath = pathFinder.findPath(CurrentTile, CurrentTarget);
-            Debug.Log($"Path length {currentPath.Count}");
+            // Debug.Log($"Path length {currentPath.Count}");
         }
         return CurrentTarget != null;
 

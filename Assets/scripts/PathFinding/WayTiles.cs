@@ -22,7 +22,7 @@ public class WayTiles : MyTile
         Debug.Log(other.name);
         var o = other.GetComponentInChildren<IWalker>();
         if(o!= null){
-            Debug.Log($"arrived at point {name}");
+            // Debug.Log($"arrived at point {name}");
             o.SetNextTarget(GetNextTile());
         }
     }

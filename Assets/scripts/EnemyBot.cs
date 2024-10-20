@@ -37,7 +37,7 @@ public class EnemyBot : MonoBehaviour
     private Vector3 lastPosition;
     private float stayPutCounter;
     [SerializeField]
-    private float MaxTimeIdle;
+    private float MaxTimeIdle= 10.0f;
     
 
 
@@ -110,8 +110,10 @@ public class EnemyBot : MonoBehaviour
             stayPutCounter+=Time.deltaTime;
             if(stayPutCounter> MaxTimeIdle){
                 walker.SetNextTarget(StartingObjective);
+                stayPutCounter=0;
             }
         }else stayPutCounter=0;   
+
         lastPosition = transform.position;  
     
 

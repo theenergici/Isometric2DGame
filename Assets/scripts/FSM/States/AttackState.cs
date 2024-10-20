@@ -13,6 +13,7 @@ public class AttackState : IState
     float attackDuration = .75f;
     float backAnimationDuration= .3f;
     float attackRotation = 90;
+    Transform initialTrans;
 
     public AttackState(EnemyBot parent, PlayerDetectorTrigger playerDetector){
         _parent = parent;
@@ -26,10 +27,12 @@ public class AttackState : IState
     public void OnEnter()
     {
         _parent.isAttacking= true;
+        initialTrans= _parent.transform;
     }
 
     public void OnExit()
     {
+        _parent.transform.rotation= initialTrans.rotation;
         _parent.isAttacking=false;
         if(attacking!=null){
             _parent.StopCoroutine(attacking);
@@ -72,6 +75,7 @@ public class AttackState : IState
         }while(t<backAnimationDuration);
 
         attacking=null;
+        
         _parent.isAttacking= false;
     }
 }

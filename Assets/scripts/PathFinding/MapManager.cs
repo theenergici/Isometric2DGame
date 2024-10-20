@@ -33,7 +33,7 @@ public class MapManager : MonoBehaviour
         var tilemaps = GetComponentsInChildren<Tilemap>();
         map = new Dictionary<Vector2, MyTile>();
 
-        var wayTiles = FindObjectsOfType<WayTiles>();
+        var wayTiles = FindObjectsOfType<MyTile>();
         
         tilemap =tilemaps[0];
         
@@ -105,7 +105,7 @@ public class MapManager : MonoBehaviour
         if (renderer!=null && tileRenderer!= null)
             renderer.sortingOrder = tileRenderer.sortingOrder;
     }
-    
+
 
 
 }
