@@ -11,8 +11,8 @@ public class AttackState : IState
 
     Coroutine attacking =null;
 
-    float attackDuration = .75f;
-    float backAnimationDuration= .3f;
+    // float attackDuration = .75f;
+    // float backAnimationDuration= .3f;
     float attackRotation = 90;
     float startRotation;
     float endRotation; 
