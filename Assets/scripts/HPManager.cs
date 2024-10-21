@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public class HPManager : MonoBehaviour, IHittable
@@ -13,7 +15,11 @@ public class HPManager : MonoBehaviour, IHittable
     private HP hp;
     [SerializeField]
     private GameObject ParentObject;
+    [SerializeField]
+    UnityEvent OnHitEvents;
 
+    [SerializeField]
+    UnityEvent OnDeathEvents;
 
     private void Awake() {
         hp= new HP(MAX_HP);
@@ -27,6 +33,8 @@ public class HPManager : MonoBehaviour, IHittable
     {   
         HP_visual.gameObject.SetActive(false);
         ParentObject.SetActive(false);
+
+        OnDeathEvents?.Invoke();
         Debug.Log($"Chracter {name} is dead\n");
 
     }
@@ -36,7 +44,7 @@ public class HPManager : MonoBehaviour, IHittable
         
         bool isDead = hp.OnHit(dmg);
         HP_visual.value = hp.currentHP/hp.MaxHP;
-        
+        OnHitEvents?.Invoke();
         return isDead;
     }
 

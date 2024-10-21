@@ -62,7 +62,10 @@ public class AttackState : IState
         // attacking = _parent.StartCoroutine(attackAnimation());
         if(_player== null){
             if(_detector.Player!=null)_player= _detector.Player;
-            else Debug.Log("No player found using detector");
+            else {
+                Debug.Log("No player found using detector");
+                return;
+            }
         }
         Vector2 dir = new Vector2(_player.transform.position.x - _parent.transform.position.x , _player.transform.position.y -  _parent.transform.position.y);
         if(math.abs(dir.x) < 0.001 )dir.x = 0;

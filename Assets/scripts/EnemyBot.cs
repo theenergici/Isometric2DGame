@@ -67,7 +67,7 @@ public class EnemyBot : MonoBehaviour
         
 
         //
-        detector = GetComponent<PlayerDetectorTrigger>();  
+        detector = GetComponentInChildren<PlayerDetectorTrigger>();  
         _stateMachine  = new FSM();
 
         _renderer = GetComponent<SpriteRenderer>();
@@ -95,8 +95,8 @@ public class EnemyBot : MonoBehaviour
 
         void At(IState to, IState from, Func<bool> condition)=> _stateMachine.addTransition( from, to, condition);
 
-        Func<bool> playerDetected() => ()=>detector.playerInDetectionRange && !isAttacking;
-        Func<bool> playerOutOfRange() => ()=>!detector.playerInDetectionRange && !isAttacking;
+        Func<bool> playerDetected() => ()=> detector.playerInDetectionRange && !isAttacking;
+        Func<bool> playerOutOfRange() => ()=> !detector.playerInDetectionRange && !isAttacking;
         Func<bool> playerInATKRange() => ()=> attackCollider.IsInAttackRange && !isAttacking;
         Func<bool> TooMuchTimeIdle ()=> ()=> stayPutCounter> MaxTimeIdle;
 
