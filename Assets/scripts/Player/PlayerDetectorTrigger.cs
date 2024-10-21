@@ -27,7 +27,7 @@ public class PlayerDetectorTrigger : MonoBehaviour
                 StopCoroutine(runningCoroutine);
             }
             playerInDetectionRange = true;
-            Debug.Log($"Detected: {other.name}");
+            // Debug.Log($"Detected: {other.name}");
 
             // since we work with only one player is not an issue
             if(_player==null)_player= other.GetComponentInChildren<PlayerMonobehaviour>();
@@ -37,7 +37,7 @@ public class PlayerDetectorTrigger : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         
         if(other.GetComponent<PlayerMonobehaviour>()){
-            Debug.Log($"Player lost: {other.name}");
+            // Debug.Log($"Player lost: {other.name}");
             runningCoroutine = StartCoroutine(PlayerOutOfVision());
             
             }

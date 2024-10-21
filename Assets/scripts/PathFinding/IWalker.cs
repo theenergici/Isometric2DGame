@@ -11,13 +11,17 @@ public class IWalker : MonoBehaviour
     public List<MyTile> currentPath = new List<MyTile>();
     public PathFinding pathFinder;
 
+    
     [SerializeField]
-    float speed= 1.0f;
-
+    float NormalSpeed= 1.0f;
+    [SerializeField]
+    float sprintSpeed = 3.0f;
+    float speed;
     [SerializeField]
     Animator _animator;
 
     private void Start() {
+        speed= NormalSpeed;
         pathFinder= new PathFinding();  
         SetNextTarget(CurrentTarget);
         if(_animator==null)Debug.LogWarning($"No animator found in:{name}");
@@ -31,6 +35,13 @@ public class IWalker : MonoBehaviour
         }
         return CurrentTarget != null;
 
+    }
+
+    public void SetSprinting(){
+        speed= sprintSpeed;
+    }
+    public void SetWalking(){
+        speed= NormalSpeed;
     }
 
     public void Step(){
@@ -49,7 +60,11 @@ public class IWalker : MonoBehaviour
             {
                 PositionCharacterOnTile(currentPath[0]);
                 currentPath.RemoveAt(0);
-                if(_animator!=null) _animator.SetInteger("Direction", directionTowardsTarget(currentPath[0].transform));
+                if(_animator!=null){
+                    var t=directionTowardsTarget(currentPath[0].transform);
+                    if(t>0)
+                    _animator.SetInteger("Direction", t);
+                } 
             }
 
 
