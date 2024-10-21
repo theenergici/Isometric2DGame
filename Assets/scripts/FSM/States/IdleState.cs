@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class IdleState : IState
 {   
-    private MonoBehaviour _parent;
+    private EnemyBot _parent;
     private SpriteRenderer _renderer;
     private Color _color;
-    public IdleState(MonoBehaviour parent, SpriteRenderer renderer, Color color){
+    public IdleState(EnemyBot parent, SpriteRenderer renderer, Color color){
         _parent = parent;
         _color= color;
         _renderer = renderer;
@@ -19,7 +19,7 @@ public class IdleState : IState
 
     public void OnExit()
     {
-        
+        _parent.stayPutCounter = 0;
     }
 
     public void Tick()

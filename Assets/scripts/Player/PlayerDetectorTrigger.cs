@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerDetectorTrigger : MonoBehaviour
 {
+    [SerializeField]
     private SpriteRenderer _renderer;
     private PlayerMonobehaviour _player=null;
     public PlayerMonobehaviour Player{get{
@@ -13,7 +14,8 @@ public class PlayerDetectorTrigger : MonoBehaviour
     public bool playerInDetectionRange {get;private set;}
     private Coroutine runningCoroutine= null;
     void Awake() {
-        _renderer = GetComponent<SpriteRenderer>();
+        if(_renderer==null)
+            _renderer = GetComponent<SpriteRenderer>();
         
     }
 
@@ -21,19 +23,22 @@ public class PlayerDetectorTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
 
         if(other.GetComponent<PlayerMonobehaviour>()){
+            if(_player==null)_player= other.GetComponentInChildren<PlayerMonobehaviour>();
             if(runningCoroutine!= null){
                 StopCoroutine(runningCoroutine);
             }
             playerInDetectionRange = true;
-
-            // since we work with only one player is not an issue
-            if(!Player)_player= other.GetComponent<PlayerMonobehaviour>();
+            
         }         
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.GetComponent<PlayerMonobehaviour>())
+        
+        if(other.GetComponent<PlayerMonobehaviour>()){
+            // Debug.Log($"Player lost: {other.name}");
             runningCoroutine = StartCoroutine(PlayerOutOfVision());
+            
+            }
     }         
 
     private IEnumerator PlayerOutOfVision(){
@@ -50,9 +55,9 @@ public class PlayerDetectorTrigger : MonoBehaviour
        _renderer.color= Color.yellow;
        yield return new WaitForSecondsRealtime(0.4f);
 
- 
-        playerInDetectionRange = false;
-        runningCoroutine=null;
+
+       runningCoroutine=null;
+       playerInDetectionRange = false;  
         
     }   
     

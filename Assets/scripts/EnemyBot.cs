@@ -35,16 +35,25 @@ public class EnemyBot : MonoBehaviour
     private IWalker walker;
     
     private Vector3 lastPosition;
-    private float stayPutCounter;
+
+    
+
     [SerializeField]
     private float MaxTimeIdle= 10.0f;
-    
+    [SerializeField, Tooltip("only visualization of how much time bot has been idle")]
+    public float stayPutCounter;
+    [SerializeField]
+    AttackScript attackScript;
+
 
 
 
     private void Start() {
 
-        
+        if(attackScript==null){
+            attackScript= GetComponentInChildren<AttackScript>();
+        }
+
         Real_attackRange = attackRange + (transform.localScale.x/2 /Mathf.Sin(MathF.PI/4));
        
         attackCollider = GetComponentInChildren<AttackRangeTrigger>();
@@ -58,8 +67,9 @@ public class EnemyBot : MonoBehaviour
         
 
         //
-        detector = GetComponent<PlayerDetectorTrigger>();  
+        detector = GetComponentInChildren<PlayerDetectorTrigger>();  
         _stateMachine  = new FSM();
+
         _renderer = GetComponent<SpriteRenderer>();
         _renderer.color= DefaultColor;
 
@@ -67,7 +77,7 @@ public class EnemyBot : MonoBehaviour
         var idle = new IdleState(this, _renderer, DefaultColor);
         //TODO add player
         var chaseState = new ChaseState(this, detector, _renderer, DefaultColor, Angry, walker);
-        var atkState = new AttackState(this, detector);
+        var atkState = new AttackState(this, detector, attackScript);
         var patrolState = new PatrolState(this, walker);
 
         //TODO fix conditions
@@ -85,8 +95,8 @@ public class EnemyBot : MonoBehaviour
 
         void At(IState to, IState from, Func<bool> condition)=> _stateMachine.addTransition( from, to, condition);
 
-        Func<bool> playerDetected() => ()=>detector.playerInDetectionRange && !isAttacking;
-        Func<bool> playerOutOfRange() => ()=>!detector.playerInDetectionRange && !isAttacking;
+        Func<bool> playerDetected() => ()=> detector.playerInDetectionRange && !isAttacking;
+        Func<bool> playerOutOfRange() => ()=> !detector.playerInDetectionRange && !isAttacking;
         Func<bool> playerInATKRange() => ()=> attackCollider.IsInAttackRange && !isAttacking;
         Func<bool> TooMuchTimeIdle ()=> ()=> stayPutCounter> MaxTimeIdle;
 
@@ -110,7 +120,6 @@ public class EnemyBot : MonoBehaviour
             stayPutCounter+=Time.deltaTime;
             if(stayPutCounter> MaxTimeIdle){
                 walker.SetNextTarget(StartingObjective);
-                stayPutCounter=0;
             }
         }else stayPutCounter=0;   
 

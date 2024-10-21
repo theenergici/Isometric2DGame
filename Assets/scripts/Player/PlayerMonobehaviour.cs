@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -30,6 +31,13 @@ public class PlayerMonobehaviour : MonoBehaviour
     private Vector2 inputMove;
     private Vector2 scalingVector;
     private Rigidbody2D rb;
+    private AttackScript AttackScript;
+
+
+    [SerializeField]
+    Animator viewAnimator;
+    
+    public Direction ViewDirection{get; private set;} 
     
     public MyTile currentTile;
     
@@ -39,6 +47,9 @@ public class PlayerMonobehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //due to the isometric view the EW direction should be 2*NS direction to keep the correct perspective
         scalingVector = new Vector2(isoRatio * EW_Speed, NS_Speed);
+        AttackScript = GetComponentInChildren<AttackScript>();
+        if(viewAnimator==null)viewAnimator= GetComponent<Animator>();
+        
         PlayerConstants.jumpHeight= MaxJumpHeight;
     }
 
@@ -73,6 +84,19 @@ public class PlayerMonobehaviour : MonoBehaviour
 
         Vector2 t = value.Get<Vector2>();
         inputMove = VectorMath.rotateVector(t, -Mathf.PI/4);
+        
+        var d = DirectionMap.Map(inputMove);
+        
+        if(d!= Direction.origin){
+            // Debug.Log(d);
+            ViewDirection = d; 
+            AttackScript?.changeDirection(d);
+            if(viewAnimator!=null){
+                viewAnimator.SetInteger("Direction", (int)d);
+            }
+        }       
+            
+
 
         //Comentable if we dont want it to be changeable at run time
         PlayerConstants.jumpHeight= MaxJumpHeight;

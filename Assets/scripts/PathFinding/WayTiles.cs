@@ -19,7 +19,7 @@ public class WayTiles : MyTile
         
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other.name);
+        // Debug.Log(other.name);
         var o = other.GetComponentInChildren<IWalker>();
         if(o!= null){
             // Debug.Log($"arrived at point {name}");

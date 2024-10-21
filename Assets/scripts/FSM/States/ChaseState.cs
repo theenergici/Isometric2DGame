@@ -40,20 +40,25 @@ public class ChaseState : IState
         lastObjective = _walker.CurrentTarget;
         _walker.SetNextTarget(_player.currentTile);
 
+        
         _renderer.color= angryColor;
         tickCounter=0;
         
+        _walker.SetSprinting();
     }
 
     public void OnExit()
     {   
         _renderer.color= normalColor;
         _walker.SetNextTarget(lastObjective);
+        _walker.SetWalking();
+        
     }
 
     public void Tick()
     {
         tickCounter++;
+        Debug.Log("Chasing player");
         _walker.Step();
         if(tickCounter%tickToRecalculate==0 && _player!=null){
             _walker.SetNextTarget(_player.currentTile);
