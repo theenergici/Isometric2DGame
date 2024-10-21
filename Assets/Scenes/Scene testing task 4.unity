@@ -542,22 +542,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1960065415241838290, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 7c21f39fc0592be4b9df1da02dca693e, type: 2}
-    - target: {fileID: 1984812829952830990, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
-      propertyPath: SpriteToOrderInLayer
-      value: 
-      objectReference: {fileID: 1065798149}
     - target: {fileID: 3288105351125969015, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4903489298560460256, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1010172035}
     - target: {fileID: 6506921868064287325, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.798
@@ -1054,16 +1042,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde5b4b721e1c97428c35ab47863fc8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1010172035 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6688473649620370523, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
-  m_PrefabInstance: {fileID: 351869516}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1065798149 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4425234444789606985, guid: a4c43d00f0648744997c950c05c6dea8, type: 3}
-  m_PrefabInstance: {fileID: 351869516}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1137150206
 PrefabInstance:
   m_ObjectHideFlags: 0

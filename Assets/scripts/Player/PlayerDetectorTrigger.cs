@@ -23,14 +23,12 @@ public class PlayerDetectorTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
 
         if(other.GetComponent<PlayerMonobehaviour>()){
+            if(_player==null)_player= other.GetComponentInChildren<PlayerMonobehaviour>();
             if(runningCoroutine!= null){
                 StopCoroutine(runningCoroutine);
             }
             playerInDetectionRange = true;
-            // Debug.Log($"Detected: {other.name}");
-
-            // since we work with only one player is not an issue
-            if(_player==null)_player= other.GetComponentInChildren<PlayerMonobehaviour>();
+            
         }         
     }
 
@@ -56,11 +54,10 @@ public class PlayerDetectorTrigger : MonoBehaviour
        yield return new WaitForSecondsRealtime(0.4f);
        _renderer.color= Color.yellow;
        yield return new WaitForSecondsRealtime(0.4f);
-        
-        playerInDetectionRange = false;
- 
-        
-        runningCoroutine=null;
+
+
+       runningCoroutine=null;
+       playerInDetectionRange = false;  
         
     }   
     
