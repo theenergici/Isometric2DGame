@@ -32,6 +32,10 @@ public class PlayerMonobehaviour : MonoBehaviour
     private Vector2 scalingVector;
     private Rigidbody2D rb;
     private AttackScript AttackScript;
+
+
+    [SerializeField]
+    Animator viewAnimator;
     
     public Direction ViewDirection{get; private set;} 
     
@@ -44,6 +48,7 @@ public class PlayerMonobehaviour : MonoBehaviour
         //due to the isometric view the EW direction should be 2*NS direction to keep the correct perspective
         scalingVector = new Vector2(isoRatio * EW_Speed, NS_Speed);
         AttackScript = GetComponentInChildren<AttackScript>();
+        if(viewAnimator==null)viewAnimator= GetComponent<Animator>();
         
         PlayerConstants.jumpHeight= MaxJumpHeight;
     }
@@ -86,6 +91,9 @@ public class PlayerMonobehaviour : MonoBehaviour
             // Debug.Log(d);
             ViewDirection = d; 
             AttackScript?.changeDirection(d);
+            if(viewAnimator!=null){
+                viewAnimator.SetInteger("Direction", (int)d);
+            }
         }       
             
 
