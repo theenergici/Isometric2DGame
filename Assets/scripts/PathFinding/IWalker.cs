@@ -14,9 +14,13 @@ public class IWalker : MonoBehaviour
     [SerializeField]
     float speed= 1.0f;
 
+    [SerializeField]
+    Animator _animator;
+
     private void Start() {
         pathFinder= new PathFinding();  
         SetNextTarget(CurrentTarget);
+        if(_animator==null)Debug.LogWarning($"No animator found in:{name}");
     }
     public bool SetNextTarget(MyTile newTarget){
         CurrentTarget = newTarget;
@@ -40,11 +44,14 @@ public class IWalker : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, currentPath[0].transform.position, step);
         transform.position = new Vector3(transform.position.x, transform.position.y, zIndex);
 
+        
         if(Vector2.Distance(transform.position, currentPath[0].transform.position)< 0.01f)
             {
                 PositionCharacterOnTile(currentPath[0]);
                 currentPath.RemoveAt(0);
+                if(_animator!=null) _animator.SetInteger("Direction", directionTowardsTarget(currentPath[0].transform));
             }
+
 
     }
 
@@ -52,5 +59,13 @@ public class IWalker : MonoBehaviour
     {
         MapManager.Instance.PositionOnTile(tile, transform);
         CurrentTile = tile;
+    }
+
+    public int directionTowardsTarget(Transform target){
+        if(currentPath.Count<=0)return -1;
+        var dir = new Vector2(target.position.x - transform.position.x,  target.position.y - transform.position.y);
+        if(Mathf.Abs(dir.x) < 0.01 )dir.x = 0;
+        if(Mathf.Abs(dir.y) < 0.01 )dir.y = 0;
+        return (int)DirectionMap.Map(dir);
     }
 }

@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 6271528606264837690}
   - component: {fileID: 6870680318721951268}
   - component: {fileID: 3780962294342597391}
+  - component: {fileID: 1960065415241838290}
+  - component: {fileID: 1984812829952830990}
+  - component: {fileID: 211879847718131435}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -105,9 +108,10 @@ MonoBehaviour:
   speedDescription: "The NS and EW speed have been adjusted in code to the ration
     usedby default in the isometric view.\n\tIf this ratio is changed it should be
     changed in the code as well."
-  NS_Speed: 5
-  EW_Speed: 5
+  NS_Speed: 3
+  EW_Speed: 3
   MaxJumpHeight: 1
+  viewAnimator: {fileID: 1960065415241838290}
   currentTile: {fileID: 0}
 --- !u!50 &6271528606264837690
 Rigidbody2D:
@@ -219,6 +223,55 @@ PolygonCollider2D:
       - {x: 0.5, y: 0.015625}
       - {x: 0.0703125, y: 0.25}
   m_UseDelaunayMesh: 0
+--- !u!95 &1960065415241838290
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3288105351125969015}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bd256ef29c18c8849a6c178e242b7690, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1984812829952830990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3288105351125969015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04aa46bbfac8ac49963ed3cc9fb4896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1960065415241838290}
+  SpriteToOrderInLayer: {fileID: 0}
+--- !u!114 &211879847718131435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3288105351125969015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa16d4e83b91504c8aa6fec9a12b5dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Original: {r: 0, g: 1, b: 1, a: 1}
+  OnHit: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &813567025089890404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -265,6 +318,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 281518330685648474, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760568004454404551, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4696685281245871156, guid: 507bafa88b7f32c479d842ff64f0bbf5, type: 3}
@@ -385,6 +442,34 @@ PrefabInstance:
       propertyPath: ParentObject
       value: 
       objectReference: {fileID: 3288105351125969015}
+    - target: {fileID: 7046587237110864407, guid: e4e99977df7b743499011f76b5e9a55f, type: 3}
+      propertyPath: OnHitEvents.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046587237110864407, guid: e4e99977df7b743499011f76b5e9a55f, type: 3}
+      propertyPath: OnHitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046587237110864407, guid: e4e99977df7b743499011f76b5e9a55f, type: 3}
+      propertyPath: OnHitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 211879847718131435}
+    - target: {fileID: 7046587237110864407, guid: e4e99977df7b743499011f76b5e9a55f, type: 3}
+      propertyPath: OnHitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046587237110864407, guid: e4e99977df7b743499011f76b5e9a55f, type: 3}
+      propertyPath: OnHitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnHitChangeColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046587237110864407, guid: e4e99977df7b743499011f76b5e9a55f, type: 3}
+      propertyPath: OnHitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SpriteAnimator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046587237110864407, guid: e4e99977df7b743499011f76b5e9a55f, type: 3}
+      propertyPath: OnHitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
