@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AttackState : IState
 {
@@ -56,13 +57,15 @@ public class AttackState : IState
             DoAttack();
         }
     }
-
+    
     private void DoAttack(){
 
         // attacking = _parent.StartCoroutine(attackAnimation());
         if(_player== null){
             if(_detector.Player!=null)_player= _detector.Player;
-            else {
+            else _player= _detector.ForceGetPlayer();
+            
+            if(_player==null) {
                 Debug.Log("No player found using detector");
                 return;
             }

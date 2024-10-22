@@ -130,7 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentTarget: {fileID: 0}
   currentPath: []
-  speed: 1
+  NormalSpeed: 1
+  sprintSpeed: 3
   _animator: {fileID: 4442184346581767288}
 --- !u!50 &-6142698794320803295
 Rigidbody2D:
@@ -544,7 +545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e40d6e9be606aa4bbd28cbe214ec928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 1094399843792882852}
+  _bodyRenderer: {fileID: 1094399843792882852}
+  _viewRenderer: {fileID: 869294521383015043}
 --- !u!1 &8803440145625137720
 GameObject:
   m_ObjectHideFlags: 0
